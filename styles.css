@@ -14,7 +14,7 @@
   --heading-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   --body-font: "Avenir Next", "Segoe UI", sans-serif;
   --mono-font: "SFMono-Regular", "JetBrains Mono", "Fira Code", Consolas, monospace;
-  --max-width: 1180px;
+  --max-width: 1320px;
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
@@ -474,13 +474,29 @@ button {
 }
 
 .section-heading {
-  max-width: 720px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  column-gap: clamp(24px, 5vw, 72px);
+  row-gap: 12px;
+  align-items: end;
+  max-width: none;
   margin-bottom: 26px;
+}
+
+.section-heading > .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
 }
 
 .section-heading h2 {
   font-size: clamp(2.4rem, 4vw, 4.2rem);
-  max-width: 11ch;
+  max-width: 12ch;
+}
+
+.section-heading > p:not(.eyebrow) {
+  margin: 0;
+  max-width: 34ch;
+  justify-self: end;
 }
 
 .timeline-grid,
@@ -811,10 +827,16 @@ button {
 .contact-section .section-heading {
   max-width: none;
   margin-bottom: 0;
+  display: block;
 }
 
 .contact-section .section-heading h2 {
   max-width: 10ch;
+}
+
+.contact-section .section-heading > p:not(.eyebrow) {
+  max-width: 34ch;
+  justify-self: auto;
 }
 
 .contact-card {
@@ -973,6 +995,19 @@ button {
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading > .eyebrow {
+    margin-bottom: 18px;
+  }
+
+  .section-heading > p:not(.eyebrow) {
+    max-width: 68ch;
+    justify-self: auto;
   }
 }
 
