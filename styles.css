@@ -776,6 +776,18 @@ button {
   gap: 12px;
 }
 
+.lab-results.is-active {
+  animation: labPulse 320ms ease;
+}
+
+.lab-empty-state {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px dashed rgba(114, 226, 194, 0.24);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+}
+
 .result-card {
   padding: 16px;
   border-radius: 18px;
@@ -811,6 +823,18 @@ button {
   border: 1px solid rgba(114, 226, 194, 0.16);
   color: var(--accent);
   font-size: 0.78rem;
+}
+
+@keyframes labPulse {
+  0% {
+    transform: translateY(6px);
+    opacity: 0.68;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .walkthrough {

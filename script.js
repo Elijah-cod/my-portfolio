@@ -123,6 +123,7 @@ function renderResults(query) {
     .slice(0, 3);
 
   labResults.innerHTML = "";
+  labResults.classList.remove("is-active");
 
   ranked.forEach((result, index) => {
     const card = document.createElement("article");
@@ -141,6 +142,11 @@ function renderResults(query) {
     `;
 
     labResults.appendChild(card);
+  });
+
+  requestAnimationFrame(() => {
+    labResults.classList.add("is-active");
+    labResults.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 }
 
@@ -272,13 +278,17 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function runLabQuery() {
+  renderResults(queryInput.value);
+}
+
 commandInput.addEventListener("input", () => renderCommands(commandInput.value));
 
-runQueryButton.addEventListener("click", () => renderResults(queryInput.value));
+runQueryButton.addEventListener("click", runLabQuery);
 
 queryInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    renderResults(queryInput.value);
+    runLabQuery();
   }
 });
 
@@ -304,5 +314,4 @@ if ("IntersectionObserver" in window) {
   revealTargets.forEach((element) => element.classList.add("is-visible"));
 }
 
-renderResults(queryInput.value);
 renderCommands();
