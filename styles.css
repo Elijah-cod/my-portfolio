@@ -801,12 +801,52 @@ button {
   margin-top: 16px;
 }
 
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.contact-section .section-heading {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+.contact-section .section-heading h2 {
+  max-width: 10ch;
+}
+
 .contact-card {
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  padding: 28px;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top right, rgba(114, 226, 194, 0.12), transparent 32%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.contact-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--mono-font);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.contact-copy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.contact-actions {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 14px;
-  padding: 28px;
 }
 
 .command-palette[hidden] {
@@ -917,7 +957,8 @@ button {
   .lab-grid,
   .ledger-grid,
   .service-grid,
-  .human-grid {
+  .human-grid,
+  .contact-section {
     grid-template-columns: 1fr;
   }
 
