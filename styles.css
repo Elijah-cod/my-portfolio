@@ -14,7 +14,7 @@
   --heading-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   --body-font: "Avenir Next", "Segoe UI", sans-serif;
   --mono-font: "SFMono-Regular", "JetBrains Mono", "Fira Code", Consolas, monospace;
-  --max-width: 1240px;
+  --max-width: 1340px;
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
@@ -201,8 +201,8 @@ button {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.8fr);
-  gap: 26px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 24px;
   padding-block: 72px 48px;
 }
 
@@ -247,8 +247,9 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(3.2rem, 7vw, 5.9rem);
-  max-width: 13ch;
+  font-size: clamp(2.8rem, 5.2vw, 4.9rem);
+  line-height: 1;
+  max-width: 11ch;
 }
 
 .hero-text,
@@ -474,18 +475,30 @@ button {
 }
 
 .section-heading {
-  max-width: 1040px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  column-gap: clamp(28px, 4vw, 52px);
+  row-gap: 12px;
+  align-items: end;
+  max-width: none;
   margin-bottom: 32px;
 }
 
+.section-heading > .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
 .section-heading h2 {
-  font-size: clamp(2.4rem, 4vw, 4.2rem);
-  max-width: 14ch;
+  font-size: clamp(2.15rem, 3.25vw, 3.65rem);
+  line-height: 1.02;
+  max-width: 10ch;
 }
 
 .section-heading > p:not(.eyebrow) {
-  margin: 18px 0 0;
-  max-width: 62ch;
+  margin: 0;
+  max-width: 36ch;
+  justify-self: start;
 }
 
 .timeline-grid,
@@ -956,6 +969,7 @@ button {
 
   .site-header,
   .hero,
+  .section-heading,
   .timeline-grid,
   .project-grid,
   .project-archive,
@@ -985,8 +999,13 @@ button {
     margin-bottom: 18px;
   }
 
+  .section-heading h2 {
+    max-width: 12ch;
+  }
+
   .section-heading > p:not(.eyebrow) {
     max-width: 68ch;
+    margin-top: 0;
   }
 }
 
@@ -996,12 +1015,13 @@ button {
   }
 
   .hero h1 {
-    font-size: clamp(2.7rem, 13vw, 4rem);
+    font-size: clamp(2.45rem, 11vw, 3.5rem);
+    max-width: 10ch;
   }
 
   .section-heading h2,
   .command-header h2 {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.9rem, 7vw, 2.65rem);
   }
 
   .hero-copy,
