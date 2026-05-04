@@ -2,47 +2,54 @@ const searchNodes = [
   {
     title: "Hybrid RAG Engine",
     description:
-      "Combines semantic retrieval and graph-aware context so responses can use relevance and relationships together.",
-    tags: ["graph", "rag", "hybrid", "retrieval"],
+      "Full-stack AI system combining semantic retrieval, graph-aware context, and grounded orchestration.",
+    tags: ["graph", "rag", "hybrid", "retrieval", "ai", "systems"],
   },
   {
     title: "Anime Tracker",
     description:
-      "Tracks anime progress and list state while handling external data, discovery flows, and UI clarity.",
-    tags: ["anime", "tracking", "state", "api"],
+      "Tracks external data, progress state, and product-facing clarity across a real full-stack application flow.",
+    tags: ["anime", "tracking", "state", "api", "fullstack", "product"],
   },
   {
     title: "Reflection Hub",
     description:
-      "Journaling and reflection product with persistent entries, structured data, and a calm responsive interface.",
-    tags: ["reflection", "journal", "prisma", "entries"],
+      "Structured journaling product with persistent entries, calm UX, and durable application modeling.",
+    tags: ["reflection", "journal", "prisma", "entries", "fullstack"],
   },
   {
     title: "Anatomy UI",
     description:
-      "Explores component structure, interface clarity, and the design-engineering side of product work.",
-    tags: ["ui", "components", "design", "frontend"],
+      "Explores interface systems, component clarity, and the design-engineering side of product work.",
+    tags: ["ui", "components", "design", "frontend", "product"],
   },
   {
     title: "Bento Grid",
     description:
-      "Layout-focused build exploring responsive grid composition, visual hierarchy, and presentation rhythm.",
-    tags: ["layout", "grid", "frontend", "responsive"],
+      "Layout-focused build exploring responsive composition, hierarchy, and presentation rhythm.",
+    tags: ["layout", "grid", "frontend", "responsive", "design"],
   },
   {
     title: "Ecommerce Website",
     description:
-      "Commerce interface work centered on product browsing, user flow, and polished frontend implementation.",
-    tags: ["ecommerce", "commerce", "ux", "frontend"],
+      "Commerce interface work centered on product flow, browsing clarity, and polished frontend implementation.",
+    tags: ["ecommerce", "commerce", "ux", "frontend", "product"],
   },
 ];
 
 const commands = [
   { label: "Jump to Projects", meta: "Section", action: () => scrollToTarget("#projects") },
-  { label: "Open Stack Matrix", meta: "Section", action: () => scrollToTarget("#stack") },
-  { label: "Launch Technical Labs", meta: "Section", action: () => scrollToTarget("#labs") },
-  { label: "Read the Technical Ledger", meta: "Section", action: () => scrollToTarget("#ledger") },
+  { label: "Open Capabilities", meta: "Section", action: () => scrollToTarget("#stack") },
+  { label: "Launch Retrieval Lab", meta: "Section", action: () => scrollToTarget("#labs") },
+  { label: "Read Technical Writing", meta: "Section", action: () => scrollToTarget("#ledger") },
   { label: "Go to Contact", meta: "Section", action: () => scrollToTarget("#contact") },
+  {
+    label: "Compose Email Draft",
+    meta: "Contact",
+    action: () => {
+      window.location.href = "mailto:iamngunjiri@gmail.com";
+    },
+  },
   {
     label: "Open Hybrid RAG Engine Repo",
     meta: "Project",
@@ -80,6 +87,7 @@ const commandList = document.getElementById("command-list");
 const queryInput = document.getElementById("query-input");
 const labResults = document.getElementById("lab-results");
 const runQueryButton = document.getElementById("run-query");
+const contactForm = document.getElementById("contact-form");
 
 let activeIndex = 0;
 
@@ -282,6 +290,26 @@ function runLabQuery() {
   renderResults(queryInput.value);
 }
 
+function openContactDraft(event) {
+  event.preventDefault();
+
+  const formData = new FormData(contactForm);
+  const name = String(formData.get("name") || "").trim();
+  const email = String(formData.get("email") || "").trim();
+  const message = String(formData.get("message") || "").trim();
+
+  const draftSubject = name ? `Portfolio inquiry from ${name}` : "Portfolio inquiry";
+  const draftBody = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    "",
+    message,
+  ].join("\n");
+
+  const mailto = `mailto:iamngunjiri@gmail.com?subject=${encodeURIComponent(draftSubject)}&body=${encodeURIComponent(draftBody)}`;
+  window.location.href = mailto;
+}
+
 commandInput.addEventListener("input", () => renderCommands(commandInput.value));
 
 runQueryButton.addEventListener("click", runLabQuery);
@@ -292,7 +320,11 @@ queryInput.addEventListener("keydown", (event) => {
   }
 });
 
-const revealTargets = document.querySelectorAll(".section, .hero-copy, .hero-panel");
+if (contactForm) {
+  contactForm.addEventListener("submit", openContactDraft);
+}
+
+const revealTargets = document.querySelectorAll("[data-reveal]");
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(

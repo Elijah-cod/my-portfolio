@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-04T06:29:07Z",
+  "title": "Design System: Elijah Mathai Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "base-night": {
+        "role": "neutral",
+        "displayName": "Base Night",
+        "canonical": "#07111f",
+        "tonalRamp": ["#03080f", "#07111f", "#0a1526", "#10203a"]
+      },
+      "surface-frost": {
+        "role": "neutral",
+        "displayName": "Frost Surface",
+        "canonical": "#0a1628b8",
+        "tonalRamp": ["#07111f", "#0a1628b8", "#0d1b31e0", "#10203af5"]
+      },
+      "accent-mint": {
+        "role": "primary",
+        "displayName": "Signal Mint",
+        "canonical": "#72e2c2",
+        "tonalRamp": ["#316f60", "#4bb398", "#72e2c2", "#a5ff8c"]
+      },
+      "accent-coral": {
+        "role": "tertiary",
+        "displayName": "Warm Relay",
+        "canonical": "#ff9b71",
+        "tonalRamp": ["#8a533d", "#c77958", "#ff9b71", "#ffd5bf"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero statements and section-defining headlines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Narrative pivots and section headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Dense technical explanation with calm readability."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "System metadata, chips, and interface annotation."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-shell",
+        "value": "0 24px 80px rgba(0, 0, 0, 0.28)",
+        "purpose": "Primary containment shadow for shells, cards, and overlays."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Default transition easing in the current codebase."
+      },
+      {
+        "name": "hover-lift",
+        "value": "translateY(-2px)",
+        "purpose": "Shared hover motion for buttons and interactive links."
+      },
+      {
+        "name": "reveal-enter",
+        "value": "opacity 500ms ease, transform 500ms ease",
+        "purpose": "Section and hero reveal choreography."
+      },
+      {
+        "name": "lab-pulse",
+        "value": "320ms ease",
+        "purpose": "Brief activation pulse for semantic search results."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "1080px"
+      },
+      {
+        "name": "mobile",
+        "value": "720px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call to action with controlled brightness and subtle lift.",
+      "html": "<a class=\"button button-primary\" href=\"#contact\">Start the conversation</a>",
+      "css": ".button.button-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 20px; border-radius: 999px; background: linear-gradient(135deg, #72e2c2, #a5ff8c); color: #04101c; font-weight: 700; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; } .button.button-primary:hover, .button.button-primary:focus-visible { transform: translateY(-2px); }"
+    },
+    {
+      "name": "Frosted Panel Card",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "Core container treatment for hero blocks, cards, and content sections.",
+      "html": "<article class=\"ds-panel-card\"><h3>System Depth</h3><p>Architecture, retrieval, and interface craft in one surface.</p></article>",
+      "css": ".ds-panel-card { background: rgba(10, 22, 40, 0.72); color: #ecf4ff; border: 1px solid rgba(159, 180, 214, 0.18); border-radius: 28px; padding: 26px; backdrop-filter: blur(18px); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28); } .ds-panel-card p { color: #a8b7d3; line-height: 1.72; }"
+    },
+    {
+      "name": "Command Palette Dialog",
+      "kind": "custom",
+      "description": "Signature overlay interaction for navigation and project shortcuts.",
+      "html": "<section class=\"ds-command-dialog\"><header><h2>Command center</h2><button type=\"button\">×</button></header><input type=\"text\" value=\"jump to projects\" /></section>",
+      "css": ".ds-command-dialog { width: min(680px, calc(100% - 28px)); margin: 11vh auto 0; padding: 20px; border-radius: 24px; background: rgba(7, 17, 31, 0.96); border: 1px solid rgba(159, 180, 214, 0.3); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28); } .ds-command-dialog input { width: 100%; padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(159, 180, 214, 0.18); background: rgba(3, 10, 20, 0.88); color: #ecf4ff; }"
+    },
+    {
+      "name": "Architecture Frame",
+      "kind": "custom",
+      "description": "Diagrammatic component that visualizes backend thinking without leaving the site's visual language.",
+      "html": "<div class=\"ds-architecture-frame\"><div class=\"ds-architecture-node ds-architecture-node-accent\">Client UX</div><div class=\"ds-architecture-line\"></div><div class=\"ds-architecture-row\"><div class=\"ds-architecture-node\">API Layer</div><div class=\"ds-architecture-node\">Graph Context</div></div></div>",
+      "css": ".ds-architecture-frame { padding: 22px; border-radius: 20px; border: 1px solid rgba(159, 180, 214, 0.3); background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.02)); } .ds-architecture-row { display: flex; gap: 12px; flex-wrap: wrap; } .ds-architecture-node { flex: 1 1 100px; padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(159, 180, 214, 0.18); background: rgba(7, 17, 31, 0.82); color: #ecf4ff; font-family: \"SFMono-Regular\", \"JetBrains Mono\", monospace; font-size: 0.88rem; } .ds-architecture-node-accent { background: rgba(114, 226, 194, 0.12); border-color: rgba(114, 226, 194, 0.22); color: #72e2c2; } .ds-architecture-line { width: 2px; height: 22px; margin: 10px auto; background: linear-gradient(180deg, rgba(114, 226, 194, 0.8), rgba(114, 226, 194, 0)); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Engine",
+    "componentPhilosophy": "Refined and restrained",
+    "dos": [
+      "Preserve the cool-night palette and mint-led activation hierarchy.",
+      "Keep dark surfaces translucent and layered instead of flattening them.",
+      "Maintain the serif, sans, and mono role split.",
+      "Use motion briefly and directionally."
+    ],
+    "donts": [
+      "Do not make the site generic or template-shaped.",
+      "Do not use stock developer-portfolio tropes.",
+      "Do not drift into interchangeable SaaS dark-mode styling.",
+      "Do not use hype-heavy AI visuals with little substance.",
+      "Do not add gimmicks that feel louder than the work itself.",
+      "Do not make the site feel mass-produced, derivative, or like it is borrowing someone else's identity."
+    ]
+  }
+}
