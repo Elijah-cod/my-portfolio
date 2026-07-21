@@ -3,6 +3,9 @@ const menuButton = document.querySelector("[data-menu-toggle]");
 const menu = document.querySelector("[data-menu]");
 const contactForm = document.getElementById("contact-form");
 const formNote = document.getElementById("form-note");
+const motionStage = document.querySelector("[data-motion-stage]");
+const portraitMotion = document.querySelector("[data-portrait-motion]");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 document.querySelectorAll("[data-year]").forEach((node) => {
   node.textContent = new Date().getFullYear();
@@ -52,6 +55,46 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
 
   revealObserver.observe(element);
 });
+
+if (motionStage && !reducedMotion.matches) {
+  const steps = [...motionStage.querySelectorAll(".flow-step")];
+
+  motionStage.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+
+    const bounds = motionStage.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const activeStep = Math.min(steps.length - 1, Math.max(0, Math.floor((y / bounds.height) * steps.length)));
+
+    motionStage.classList.add("is-pointer-active");
+    motionStage.style.setProperty("--pointer-x", `${x}px`);
+    motionStage.style.setProperty("--pointer-y", `${y}px`);
+    steps.forEach((step, index) => step.classList.toggle("is-current", index === activeStep));
+  });
+
+  motionStage.addEventListener("pointerleave", () => {
+    motionStage.classList.remove("is-pointer-active");
+    steps.forEach((step, index) => step.classList.toggle("is-current", index === 0));
+  });
+}
+
+if (portraitMotion && !reducedMotion.matches) {
+  const hero = portraitMotion.closest(".hero");
+
+  hero?.addEventListener("pointermove", (event) => {
+    const bounds = hero.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 10;
+    portraitMotion.style.setProperty("--portrait-x", `${x}px`);
+    portraitMotion.style.setProperty("--portrait-y", `${y}px`);
+  });
+
+  hero?.addEventListener("pointerleave", () => {
+    portraitMotion.style.removeProperty("--portrait-x");
+    portraitMotion.style.removeProperty("--portrait-y");
+  });
+}
 
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
