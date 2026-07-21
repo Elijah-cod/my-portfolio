@@ -42,7 +42,16 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.12, rootMargin: "0px 0px -6%" }
 );
 
-document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
+document.querySelectorAll("[data-reveal]").forEach((element) => {
+  const startsInView = element.getBoundingClientRect().top < window.innerHeight * 0.92;
+
+  if (startsInView) {
+    element.classList.add("is-visible");
+    return;
+  }
+
+  revealObserver.observe(element);
+});
 
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();

@@ -81,6 +81,7 @@ button {
 
 img {
   display: block;
+  height: auto;
   max-width: 100%;
 }
 
@@ -371,6 +372,7 @@ h3 {
 
 .portrait-field {
   position: relative;
+  aspect-ratio: 0.82;
   overflow: hidden;
   border: 1px solid var(--ink);
   border-radius: 12rem 12rem 1rem 1rem;
@@ -387,7 +389,7 @@ h3 {
 
 .portrait-field img {
   width: 100%;
-  aspect-ratio: 0.82;
+  height: 100%;
   object-fit: cover;
   object-position: 50% 18%;
 }
@@ -1192,6 +1194,7 @@ h3 {
 }
 
 .article-body {
+  min-width: 0;
   font-size: 1.03rem;
   line-height: 1.85;
 }
@@ -1236,6 +1239,7 @@ h3 {
 }
 
 .article-body pre {
+  max-width: 100%;
   overflow-x: auto;
   padding: 1.4rem;
   border-radius: var(--radius-md);
