@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="How UI/UX states and design systems reveal the API contracts, schemas, validation, and architecture a full-stack product needs."
+    />
+    <meta name="author" content="Elijah Mathai" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="From Design System to Full-Stack System | Elijah Mathai" />
+    <meta property="og:description" content="Interface states are early architecture documents. Here is how to use them to shape a stronger full-stack product." />
+    <meta property="article:published_time" content="2026-07-14" />
+    <meta property="article:author" content="Elijah Mathai" />
+    <meta property="og:url" content="https://elijah-cod.github.io/my-portfolio/articles/design-systems-to-full-stack/" />
+    <link rel="canonical" href="https://elijah-cod.github.io/my-portfolio/articles/design-systems-to-full-stack/" />
+    <link rel="icon" type="image/png" href="../../assets/elijah-mathai-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <title>From Design System to Full-Stack System | Elijah Mathai</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "From Design System to Full-Stack System",
+        "description": "How interface states reveal the architecture a full-stack product needs.",
+        "datePublished": "2026-07-14",
+        "dateModified": "2026-07-14",
+        "author": { "@type": "Person", "name": "Elijah Mathai", "url": "https://elijah-cod.github.io/my-portfolio/" },
+        "mainEntityOfPage": "https://elijah-cod.github.io/my-portfolio/articles/design-systems-to-full-stack/",
+        "keywords": ["design systems", "full-stack architecture", "UI UX", "API design", "product engineering"]
+      }
+    </script>
+  </head>
+  <body class="article-page">
+    <a class="skip-link" href="#article">Skip to article</a>
+    <header class="site-header" data-header>
+      <a class="brand" href="../../" aria-label="Elijah Mathai, home"><span class="brand-mark"><img src="../../assets/elijah-mathai-logo.png" alt="" width="44" height="44" /></span><span class="brand-name">Elijah Mathai</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary" data-menu><a href="../../#work">Work</a><a href="../../#approach">Approach</a><a href="../../#story">Story</a><a href="../">Articles</a><a class="nav-cta" href="../../#contact">Let’s talk</a></nav>
+    </header>
+
+    <main class="subpage-main" id="article">
+      <header class="article-hero page-width" data-reveal>
+        <p class="eyebrow">Design engineering · 7 minute read</p>
+        <h1>From design system to full-stack system.</h1>
+        <p class="article-dek">
+          A polished component library is valuable, but the deeper design work is in the states,
+          rules, and transitions. Those decisions often reveal the architecture before the backend exists.
+        </p>
+      </header>
+
+      <div class="page-width article-layout">
+        <article class="article-body">
+          <p>
+            Design and engineering are frequently treated as consecutive phases. Design defines the
+            screen, then engineering makes it functional. That handoff model misses the most useful
+            part of interface design: a detailed interface is a map of product behavior. Every state
+            implies data. Every transition implies a contract. Every error message implies a failure
+            mode that the system must be able to recognize.
+          </p>
+
+          <h2>Start with states, not screens</h2>
+          <p>
+            A screen is one moment in a workflow. A product must also handle the moments before data
+            arrives, after it changes, when a request fails, when a user lacks permission, and when no
+            content exists yet. Designing those states early forces useful questions. Can the action be
+            retried? Is the data optimistic or confirmed? Does the user lose their input? Which fields
+            are server-owned, and which are local drafts?
+          </p>
+          <p>
+            These are interface questions and architecture questions at the same time. If a dashboard
+            needs to show partially available data, the API may need independent resources rather than
+            one all-or-nothing response. If a form needs a recoverable draft, the product needs a clear
+            persistence policy. The visual state exposes the technical decision.
+          </p>
+
+          <blockquote>
+            The best design specifications do not describe pixels alone. They describe the system’s
+            observable behavior.
+          </blockquote>
+
+          <h2>Use the interface to shape API contracts</h2>
+          <p>
+            A stable API contract should reflect what the interface needs to explain. Consider a media
+            tracker. The UI may show source metadata, a user’s private progress, a sync timestamp, and
+            an update status. Combining all of that into one anonymous object makes ownership unclear.
+            Separating source data from user state produces cleaner endpoints and more predictable UI.
+          </p>
+          <p>
+            The same principle applies to errors. A generic 400 response may be technically accurate,
+            but it gives the interface little to work with. Structured error codes let the product
+            distinguish an invalid field, an expired session, a duplicate record, and a temporary
+            dependency failure. The copy, action, and recovery path can then match the actual problem.
+          </p>
+
+          <h2>Design tokens are only one layer of consistency</h2>
+          <p>
+            Color, typography, spacing, and component variants matter because they reduce arbitrary
+            decisions. A full-stack product also needs behavioral consistency. Pagination should work
+            the same way across resources. Validation should follow one model. Loading and retry logic
+            should use shared patterns. Access checks should not be reinvented in individual routes.
+          </p>
+          <p>
+            I think of these as system tokens. They are repeatable rules below the visual layer. When
+            both kinds of token are explicit, a team can add features without slowly changing what the
+            product means or how it behaves.
+          </p>
+
+          <h2>Prototype the risky transition</h2>
+          <p>
+            Teams often prototype the happy path because it is easiest to present. The better target is
+            the transition with the most uncertainty. That might be an optimistic update, a multi-step
+            import, an AI suggestion that needs user approval, or a workflow that crosses services.
+            Prototyping that moment reveals whether the mental model is clear and whether the system can
+            support it without hidden coupling.
+          </p>
+          <p>
+            The prototype does not need a complete backend. It needs realistic timing, believable data,
+            and enough interaction to test the decision. Once the workflow is understood, its states can
+            become acceptance criteria for the implementation.
+          </p>
+
+          <h2>Keep design present during implementation</h2>
+          <p>
+            Implementation changes what is possible. Data arrives differently than expected. A mobile
+            viewport exposes missing priorities. Error handling adds states that were absent from the
+            initial flow. Treating design as finished prevents the product from adapting intelligently.
+          </p>
+          <p>
+            My preferred workflow keeps design and engineering close: define the journey, model the
+            states, establish the contracts, build a thin vertical slice, then review the real behavior.
+            The result is not only a cleaner interface. It is an architecture that has been shaped by
+            the product it needs to support.
+          </p>
+
+          <div class="article-end">
+            <p><strong>Related work:</strong> Explore <a class="text-link" href="https://github.com/Elijah-cod/Anatomy-UI" target="_blank" rel="noreferrer">Anatomy UI ↗</a> and the product case studies on <a class="text-link" href="../../#work">my portfolio</a>.</p>
+          </div>
+        </article>
+
+        <aside class="article-aside" aria-label="Article details">
+          <div><p>Written by</p><strong>Elijah Mathai</strong></div>
+          <div><p>Published</p><time datetime="2026-07-14">July 14, 2026</time></div>
+          <div><p>Filed under</p><strong>Design engineering</strong></div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="page-width footer-grid"><div class="footer-brand"><img src="../../assets/elijah-mathai-logo.png" alt="" width="40" height="40" /><strong>Elijah Mathai</strong></div><p>© <span data-year>2026</span> Elijah Mathai. All rights reserved.</p><div class="footer-links"><a href="../">All articles</a><a href="../../#contact">Contact</a><a href="../../">Home</a></div></div></footer>
+    <script src="../../script.js"></script>
+  </body>
+</html>
