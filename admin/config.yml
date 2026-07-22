@@ -1,0 +1,48 @@
+backend:
+  name: github
+  repo: Elijah-cod/my-portfolio
+  branch: main
+  squash_merges: true
+
+publish_mode: editorial_workflow
+local_backend: true
+media_folder: assets/articles/uploads
+public_folder: /assets/articles/uploads
+logo_url: /assets/elijah-mathai-logo.png
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: content/articles
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} · {{date}}"
+    sortable_fields: [date, title, category]
+    view_filters:
+      - label: AI systems
+        field: category
+        pattern: AI systems
+      - label: Design engineering
+        field: category
+        pattern: Design engineering
+      - label: Full-stack systems
+        field: category
+        pattern: Full-stack systems
+    fields:
+      - { label: Layout, name: layout, widget: hidden, default: layouts/article.njk }
+      - { label: Title, name: title, widget: string }
+      - { label: URL slug, name: slug, widget: string, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase words separated by hyphens."] }
+      - { label: SEO description, name: description, widget: text, hint: "Aim for 140–160 characters." }
+      - { label: Archive summary, name: excerpt, widget: text }
+      - { label: Category, name: category, widget: string }
+      - { label: Publish date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Reading time, name: readTime, widget: string, default: "6 minute read" }
+      - { label: Cover image, name: image, widget: image }
+      - { label: Cover alt text, name: imageAlt, widget: string }
+      - { label: Related project URL, name: projectUrl, widget: string, required: false }
+      - { label: Related project label, name: projectLabel, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }

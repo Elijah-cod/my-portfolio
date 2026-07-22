@@ -2,39 +2,36 @@
 
 A multi-page portfolio for a full-stack product engineer working across UI/UX, backend architecture, and practical AI systems.
 
-## Site structure
+## Publishing stack
 
-- `index.html` is the portfolio homepage and selected-work overview.
-- `articles/index.html` is the public article archive.
-- `articles/<slug>/index.html` contains each long-form article.
-- `assets/` contains the logo and optimized portrait.
-- `styles.css` defines the shared responsive design system.
-- `script.js` powers mobile navigation, scroll reveals, the contact email handoff, and copyright year.
-- `sitemap.xml` and `robots.txt` help search engines discover the public pages.
+- Eleventy generates the portfolio and article pages as fast static HTML.
+- Decap CMS provides the visual article editor at `/admin/`.
+- Markdown articles live in `content/articles/` and remain portable.
+- Netlify builds every published change from the GitHub repository.
+- The sitemap, canonical URLs, social metadata, and article schema are generated automatically.
 
-## Add an article
+## Manage articles
 
-1. Duplicate one folder inside `articles/` and rename it with a short, lowercase URL slug.
-2. Update the article page title, description, canonical URL, publish date, headings, and `BlogPosting` JSON-LD.
-3. Add the article to `articles/index.html` and the homepage writing section.
-4. Add its public URL and `lastmod` date to `sitemap.xml`.
-5. Use one clear search topic per article, write an accurate description, and link to relevant projects or related articles.
+After the site is connected to Netlify and GitHub OAuth, visit `/admin/` to create, edit, preview, publish, or delete an article. Publishing through Decap commits the Markdown and uploaded cover image to GitHub; Netlify then rebuilds the public site.
+
+Articles can also be edited directly in `content/articles/`. Front matter controls the title, URL, SEO description, category, cover image, publication date, and related project link.
 
 ## Run locally
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8000`.
+Then open `http://localhost:8080`. For local CMS editing, run `npx decap-server` in a second terminal and visit `http://localhost:8080/admin/`.
 
-## Deploy on GitHub Pages
+## Deploy on Netlify
 
-The GitHub Actions workflow at `.github/workflows/deploy-pages.yml` deploys the static site.
+1. Import `Elijah-cod/my-portfolio` as a new Netlify project.
+2. Netlify reads `netlify.toml`, runs `npm run build`, and publishes `_site`.
+3. In GitHub, open `Settings` -> `Developer settings` -> `OAuth Apps`, then register an application with `https://api.netlify.com/auth/done` as its callback URL.
+4. In Netlify, open `Project configuration` -> `Access & security` -> `OAuth`, install the GitHub provider, and enter the OAuth app's client ID and secret.
+5. Set the production URL in Netlify; its build-provided `URL` variable updates all canonical and sitemap URLs automatically.
+6. Open the deployed `/admin/` route and sign in with a GitHub account that has repository write access.
 
-1. Push the latest commits to `main`.
-2. In GitHub, open `Settings` -> `Pages`.
-3. Set the source to `GitHub Actions`.
-4. Wait for `Deploy Portfolio to GitHub Pages` to finish.
-
-Default URL: `https://elijah-cod.github.io/my-portfolio/`
+The CMS uses Decap's direct GitHub backend rather than Git Gateway. Keep repository access limited to trusted editors because publishing creates repository commits.
