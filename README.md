@@ -2,9 +2,9 @@
 
 A multi-page portfolio for a full-stack product engineer working across UI/UX, backend architecture, and practical AI systems.
 
-Production: [elijah-mathai-portfolio.netlify.app](https://elijah-mathai-portfolio.netlify.app)
+Production: [elijahmathai.com](https://elijahmathai.com)
 
-Article studio: [elijah-mathai-portfolio.netlify.app/admin/](https://elijah-mathai-portfolio.netlify.app/admin/)
+Article studio: [elijahmathai.com/admin/](https://elijahmathai.com/admin/)
 
 ## Publishing stack
 
