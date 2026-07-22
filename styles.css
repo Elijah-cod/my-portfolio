@@ -251,27 +251,32 @@ h3 {
 
 .hero::after {
   position: absolute;
-  top: 6%;
-  right: -8rem;
+  top: 18%;
+  left: 50%;
   z-index: -1;
-  width: 25rem;
-  height: 25rem;
+  width: min(62rem, 90vw);
+  height: min(62rem, 90vw);
   border: 1px solid oklch(0.55 0.225 271 / 0.25);
   border-radius: 50%;
   content: "";
+  transform: translateX(-50%);
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.72fr);
-  gap: clamp(2rem, 6vw, 6rem);
+.hero-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.65rem, 3vw, 2.5rem);
   align-items: center;
+  justify-content: center;
   min-height: calc(100svh - 5rem);
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+  text-align: center;
 }
 
 .hero-copy {
-  max-width: 48rem;
+  display: grid;
+  justify-items: center;
+  max-width: 68rem;
 }
 
 .eyebrow,
@@ -292,9 +297,9 @@ h3 {
 }
 
 .hero h1 {
-  max-width: 13ch;
-  margin-bottom: 1.8rem;
-  font-size: clamp(3rem, 6.2vw, 5.65rem);
+  max-width: 21ch;
+  margin-bottom: 1.35rem;
+  font-size: clamp(2.85rem, 5.25vw, 4.9rem);
   font-weight: 600;
 }
 
@@ -304,13 +309,14 @@ h3 {
 }
 
 .hero-intro {
-  max-width: 66ch;
-  margin-bottom: 2rem;
+  max-width: 52ch;
+  margin-bottom: 1.6rem;
   color: var(--ink-soft);
   font-size: clamp(1.03rem, 1.3vw, 1.2rem);
 }
 
 .hero-actions {
+  justify-content: center;
   gap: 1.4rem;
   flex-wrap: wrap;
 }
@@ -366,27 +372,56 @@ h3 {
 
 .hero-portrait {
   position: relative;
-  max-width: 29rem;
-  justify-self: end;
+  display: grid;
+  width: clamp(8.75rem, 13vw, 11.25rem);
+  aspect-ratio: 1;
+  place-items: center;
 }
 
 .portrait-field {
   position: relative;
-  aspect-ratio: 0.82;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  border: 1px solid var(--ink);
-  border-radius: 12rem 12rem 1rem 1rem;
+  border: 0.4rem solid var(--surface);
+  border-radius: 50%;
   background: var(--blue);
-  box-shadow: 1.2rem 1.2rem 0 var(--coral);
+  box-shadow: 0 1.5rem 3rem oklch(0.19 0.035 274 / 0.2);
   transform: translate3d(var(--portrait-x, 0), var(--portrait-y, 0), 0);
   transition: transform 280ms var(--ease);
 }
 
-.portrait-field::after {
+.portrait-orbit {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, oklch(0.16 0.04 274 / 0.48), transparent 35%);
+  inset: -1.15rem;
+  z-index: 1;
+  border: 1px dashed var(--blue);
+  border-radius: 50%;
+  animation: portrait-orbit 18s linear infinite;
+}
+
+.portrait-orbit::before,
+.portrait-orbit::after {
+  position: absolute;
+  border-radius: 50%;
   content: "";
+}
+
+.portrait-orbit::before {
+  top: 0.35rem;
+  right: 1.25rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: var(--coral);
+}
+
+.portrait-orbit::after {
+  bottom: 0.65rem;
+  left: 0.65rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--mint);
 }
 
 .portrait-field img {
@@ -396,40 +431,35 @@ h3 {
   object-position: 50% 18%;
 }
 
-.portrait-note {
+.portrait-signal {
   position: absolute;
-  right: 1.25rem;
-  bottom: 0.85rem;
-  left: 1.25rem;
-  z-index: 1;
-  margin: 0;
-  color: var(--surface);
+  z-index: 3;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.portrait-index {
-  position: absolute;
-  top: 22%;
+.portrait-signal-design {
+  top: 12%;
   left: -3rem;
-  display: grid;
-  width: 7.5rem;
-  padding: 0.8rem;
-  border: 1px solid var(--ink);
   background: var(--mint);
-  transform: rotate(-6deg);
+  transform: rotate(-5deg);
 }
 
-.portrait-index span {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+.portrait-signal-systems {
+  right: -2.8rem;
+  bottom: 14%;
+  background: var(--coral);
+  transform: rotate(4deg);
 }
 
-.portrait-index strong {
-  font-size: 0.78rem;
-  line-height: 1.35;
+@keyframes portrait-orbit {
+  to { transform: rotate(1turn); }
 }
 
 .hero-manifest {
@@ -1667,20 +1697,14 @@ h3 {
 }
 
 @media (max-width: 980px) {
-  .hero-grid,
   .story-grid,
   .contact-grid,
   .capability-grid {
     grid-template-columns: 1fr;
   }
 
-  .hero-grid {
-    min-height: auto;
-  }
-
   .hero-portrait {
-    width: min(80%, 28rem);
-    justify-self: center;
+    width: 9.5rem;
   }
 
   .section-heading-split {
@@ -1777,19 +1801,20 @@ h3 {
   }
 
   .hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
+    font-size: clamp(2.45rem, 10vw, 3.8rem);
   }
 
-  .hero-grid {
-    padding-top: 3.5rem;
+  .hero-stack {
+    min-height: auto;
+    padding-block: 3.75rem 3.25rem;
   }
 
-  .hero-portrait {
-    width: calc(100% - 1.2rem);
+  .portrait-signal-design {
+    left: -2rem;
   }
 
-  .portrait-index {
-    left: -0.75rem;
+  .portrait-signal-systems {
+    right: -2rem;
   }
 
   .manifest-set span {
