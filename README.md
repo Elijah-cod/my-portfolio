@@ -2,6 +2,10 @@
 
 A multi-page portfolio for a full-stack product engineer working across UI/UX, backend architecture, and practical AI systems.
 
+Production: [elijah-mathai-portfolio.netlify.app](https://elijah-mathai-portfolio.netlify.app)
+
+Article studio: [elijah-mathai-portfolio.netlify.app/admin/](https://elijah-mathai-portfolio.netlify.app/admin/)
+
 ## Publishing stack
 
 - Eleventy generates the portfolio and article pages as fast static HTML.
