@@ -1638,7 +1638,7 @@ h3 {
 .article-card {
   display: flex;
   flex-direction: column;
-  min-height: 20rem;
+  min-height: 29rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   background: var(--surface);
 }
@@ -1660,8 +1660,17 @@ h3 {
   color: oklch(0.91 0.04 287);
 }
 
+.article-card-image {
+  width: 100%;
+  height: clamp(9rem, 12vw, 12.5rem);
+  margin-bottom: 1.4rem;
+  border: 1px solid currentColor;
+  object-fit: cover;
+  object-position: top left;
+}
+
 .article-card h3 {
-  margin: 5rem 0 1rem;
+  margin: 1.5rem 0 1rem;
   font-size: clamp(1.5rem, 2.4vw, 2.15rem);
   font-weight: 600;
 }
@@ -1855,11 +1864,30 @@ h3 {
 
 .archive-item {
   display: grid;
-  grid-template-columns: 10rem minmax(0, 1fr) auto;
+  grid-template-columns: 11rem 8.5rem minmax(0, 1fr) auto;
   gap: 2rem;
-  align-items: start;
+  align-items: center;
   padding-block: 2.4rem;
   border-bottom: 1px solid var(--line);
+}
+
+.archive-thumb {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--paper-deep);
+}
+
+.archive-thumb img {
+  width: 100%;
+  aspect-ratio: 1.6;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 350ms var(--ease);
+}
+
+.archive-item:hover .archive-thumb img {
+  transform: scale(1.035);
 }
 
 .archive-item .article-meta {
@@ -1881,6 +1909,19 @@ h3 {
 .archive-arrow {
   color: var(--blue-dark);
   font-size: 1.5rem;
+}
+
+.article-cover {
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.article-cover img {
+  width: 100%;
+  max-height: 43rem;
+  border: 1px solid var(--ink);
+  box-shadow: 0.9rem 0.9rem 0 var(--blue);
+  object-fit: cover;
+  object-position: top left;
 }
 
 .article-layout {
@@ -2040,6 +2081,25 @@ h3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     order: -1;
+  }
+
+  .archive-item {
+    grid-template-columns: 9rem minmax(0, 1fr) auto;
+    gap: 1.4rem;
+  }
+
+  .archive-thumb {
+    grid-row: 1 / span 2;
+  }
+
+  .archive-item .article-meta,
+  .archive-copy {
+    grid-column: 2;
+  }
+
+  .archive-arrow {
+    grid-column: 3;
+    grid-row: 1 / span 2;
   }
 }
 
@@ -2284,8 +2344,26 @@ h3 {
     grid-template-columns: 1fr auto;
   }
 
+  .archive-thumb {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .archive-thumb img {
+    aspect-ratio: 1.8;
+  }
+
   .archive-item .article-meta {
     grid-column: 1 / -1;
+  }
+
+  .archive-copy {
+    grid-column: 1;
+  }
+
+  .archive-arrow {
+    grid-column: 2;
+    grid-row: 3;
   }
 
   .article-aside {

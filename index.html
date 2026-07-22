@@ -16,14 +16,14 @@
     />
     <meta
       property="og:image"
-      content="https://elijah-cod.github.io/my-portfolio/assets/og.png"
+      content="{{ site.url }}/assets/og.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://elijah-cod.github.io/my-portfolio/" />
+    <meta property="og:url" content="{{ site.url }}/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://elijah-cod.github.io/my-portfolio/assets/og.png" />
-    <link rel="canonical" href="https://elijah-cod.github.io/my-portfolio/" />
+    <meta name="twitter:image" content="{{ site.url }}/assets/og.png" />
+    <link rel="canonical" href="{{ site.url }}/" />
     <link rel="icon" type="image/png" href="assets/elijah-mathai-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,8 +38,8 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Elijah Mathai",
-        "url": "https://elijah-cod.github.io/my-portfolio/",
-        "image": "https://elijah-cod.github.io/my-portfolio/assets/elijah-mathai-portrait.jpg",
+        "url": "{{ site.url }}/",
+        "image": "{{ site.url }}/assets/elijah-mathai-portrait.jpg",
         "jobTitle": "Full-Stack Product Engineer",
         "description": "Full-stack product engineer combining UI/UX expertise, backend architecture, and AI systems.",
         "sameAs": [
@@ -433,23 +433,16 @@
           </div>
 
           <div class="article-grid">
-            <article class="article-card article-featured" data-reveal>
-              <div class="article-meta"><span>AI systems</span><time datetime="2026-07-21">July 21, 2026</time></div>
-              <h3><a href="articles/the-architecture-of-retrieval/">The architecture of retrieval: when RAG needs more than vectors</a></h3>
-              <a class="article-link" href="articles/the-architecture-of-retrieval/">Read article →</a>
-            </article>
-
-            <article class="article-card" data-reveal>
-              <div class="article-meta"><span>Design engineering</span><time datetime="2026-07-14">July 14, 2026</time></div>
-              <h3><a href="articles/design-systems-to-full-stack/">From design system to full-stack system</a></h3>
-              <a class="article-link" href="articles/design-systems-to-full-stack/">Read article →</a>
-            </article>
-
-            <article class="article-card" data-reveal>
-              <div class="article-meta"><span>Performance</span><time datetime="2026-07-07">July 7, 2026</time></div>
-              <h3><a href="articles/latency-is-a-ux-problem/">Latency is a UX problem</a></h3>
-              <a class="article-link" href="articles/latency-is-a-ux-problem/">Read article →</a>
-            </article>
+            {% for article in collections.articles %}
+              {% if loop.index <= 3 %}
+                <article class="article-card{% if loop.first %} article-featured{% endif %}" data-reveal>
+                  <img class="article-card-image" src="{{ article.data.image }}" alt="" width="480" height="300" loading="lazy" />
+                  <div class="article-meta"><span>{{ article.data.category }}</span><time datetime="{{ article.date | isoDate }}">{{ article.date | readableDate }}</time></div>
+                  <h3><a href="{{ article.url }}">{{ article.data.title }}</a></h3>
+                  <a class="article-link" href="{{ article.url }}">Read article →</a>
+                </article>
+              {% endif %}
+            {% endfor %}
           </div>
 
           <a class="button button-outline article-archive-link" href="articles/">View all articles</a>

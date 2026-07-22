@@ -1,0 +1,49 @@
+---
+permalink: /articles/index.html
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Engineering articles by Elijah Mathai on RAG architecture, full-stack systems, accessibility, UI/UX, and performance." />
+    <meta name="theme-color" content="#f7f5ff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Engineering Notes | Elijah Mathai" />
+    <meta property="og:description" content="Practical writing from real AI, frontend, and full-stack product builds." />
+    <meta property="og:url" content="{{ site.url }}/articles/" />
+    <meta property="og:image" content="{{ site.url }}/assets/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="{{ site.url }}/articles/" />
+    <link rel="icon" type="image/png" href="/assets/elijah-mathai-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Engineering Notes | Elijah Mathai</title>
+  </head>
+  <body class="article-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header" data-header>
+      <a class="brand" href="/" aria-label="Elijah Mathai, home"><span class="brand-mark"><img src="/assets/elijah-mathai-logo.png" alt="" width="44" height="44" /></span><span class="brand-name">Elijah Mathai</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary" data-menu><a href="/#work">Work</a><a href="/#approach">Approach</a><a href="/#story">Story</a><a href="/articles/" aria-current="page">Articles</a><a class="nav-cta" href="/#contact">Let’s talk</a></nav>
+    </header>
+
+    <main class="subpage-main" id="main-content">
+      <section class="archive-hero"><div class="page-width" data-reveal><p class="eyebrow">Technical ledger · {{ collections.articles | length }} entries</p><h1>Notes from systems I have built.</h1><p>Architecture decisions, interaction patterns, and lessons from shipping real product experiments.</p></div></section>
+      <section class="page-width archive-grid" aria-label="Published articles">
+        {% for article in collections.articles %}
+          <article class="archive-item" data-reveal>
+            <a class="archive-thumb" href="{{ article.url }}" tabindex="-1" aria-hidden="true"><img src="{{ article.data.image }}" alt="" width="320" height="200" loading="lazy" /></a>
+            <div class="article-meta"><span>{{ article.data.category }}</span><time datetime="{{ article.date | isoDate }}">{{ article.date | shortDate }}</time></div>
+            <div class="archive-copy"><h2><a href="{{ article.url }}">{{ article.data.title }}</a></h2><p>{{ article.data.excerpt }}</p></div>
+            <a class="archive-arrow" href="{{ article.url }}" aria-label="Read {{ article.data.title }}">↗</a>
+          </article>
+        {% endfor %}
+      </section>
+    </main>
+    <footer class="site-footer"><div class="page-width footer-grid"><div class="footer-brand"><img src="/assets/elijah-mathai-logo.png" alt="" width="40" height="40" /><strong>Elijah Mathai</strong></div><p>© <span data-year>2026</span> Elijah Mathai. All rights reserved.</p><div class="footer-links"><a href="/admin/" rel="nofollow">Article studio</a><a href="https://www.linkedin.com/in/elijah-mathai-52b69725b/" target="_blank" rel="noreferrer">LinkedIn</a><a href="/">Home</a></div></div></footer>
+    <script src="/script.js"></script>
+  </body>
+</html>

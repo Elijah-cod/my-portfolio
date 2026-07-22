@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://elijah-cod.github.io/my-portfolio/sitemap.xml
