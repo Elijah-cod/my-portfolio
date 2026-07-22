@@ -1264,23 +1264,311 @@ h3 {
   to { width: 100%; }
 }
 
-.project-archive {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  padding-top: 2rem;
+.range-showcase {
+  padding-top: clamp(4rem, 8vw, 7rem);
 }
 
-.project-archive p {
+.range-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(18rem, 0.45fr);
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2rem;
+}
+
+.range-heading h3 {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+}
+
+.range-heading > p {
+  max-width: 34ch;
   margin: 0;
   color: var(--muted);
 }
 
-.project-archive div {
-  display: flex;
+.range-grid {
+  display: grid;
+  grid-template-areas:
+    "anatomy bento"
+    "anatomy commerce";
+  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr);
+  grid-template-rows: repeat(2, minmax(15rem, 1fr));
+  min-height: 34rem;
+  border: 1px solid var(--ink);
+}
+
+.range-project {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  isolation: isolate;
+}
+
+.range-project::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: oklch(0.97 0.018 291 / 0.18);
+  content: "";
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.range-project:hover::after,
+.range-project:focus-visible::after {
+  opacity: 1;
+}
+
+.range-project-anatomy {
+  grid-area: anatomy;
+  grid-template-rows: auto 1fr;
+  border-right: 1px solid var(--ink);
+  background: var(--blue);
+  color: var(--surface);
+}
+
+.range-project-bento {
+  grid-area: bento;
+  grid-template-columns: minmax(0, 1fr) 9rem;
   gap: 1.5rem;
-  flex-wrap: wrap;
-  font-weight: 700;
+  border-bottom: 1px solid var(--ink);
+  background: var(--mint);
+}
+
+.range-project-commerce {
+  grid-area: commerce;
+  grid-template-columns: minmax(0, 1fr) 11rem;
+  gap: 1.5rem;
+  background: var(--warm);
+}
+
+.range-project-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.range-index {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.range-project h4 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.range-project p {
+  max-width: 38ch;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.range-project-anatomy p {
+  color: oklch(0.91 0.025 285);
+}
+
+.range-arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 3;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  place-items: center;
+  transition: transform 220ms var(--ease), background 220ms ease, color 220ms ease;
+}
+
+.range-project:hover .range-arrow,
+.range-project:focus-visible .range-arrow {
+  background: var(--ink);
+  color: var(--surface);
+  transform: rotate(45deg);
+}
+
+.range-project-anatomy:hover .range-arrow,
+.range-project-anatomy:focus-visible .range-arrow {
+  background: var(--surface);
+  color: var(--blue-dark);
+}
+
+.anatomy-map {
+  position: relative;
+  width: min(72%, 18rem);
+  height: 17rem;
+  margin: auto;
+}
+
+.anatomy-map::before,
+.anatomy-map::after {
+  position: absolute;
+  left: 50%;
+  width: 10rem;
+  height: 1px;
+  background: oklch(0.97 0.018 291 / 0.56);
+  content: "";
+  transform-origin: left;
+}
+
+.anatomy-map::before {
+  top: 43%;
+  transform: rotate(24deg);
+}
+
+.anatomy-map::after {
+  top: 67%;
+  transform: rotate(-28deg);
+}
+
+.anatomy-map i {
+  position: absolute;
+  top: 12%;
+  bottom: 8%;
+  left: 50%;
+  width: 1px;
+  background: oklch(0.97 0.018 291 / 0.56);
+}
+
+.anatomy-node {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 1px solid var(--surface);
+  border-radius: 50%;
+  background: var(--blue-dark);
+  box-shadow: 0 0 0 0 var(--mint);
+  animation: anatomy-pulse 2.6s var(--ease) infinite;
+}
+
+.anatomy-node-head {
+  top: 4%;
+  left: calc(50% - 2rem);
+  width: 4rem;
+  height: 4rem;
+}
+
+.anatomy-node-core {
+  top: 41%;
+  left: calc(50% - 2.8rem);
+  width: 5.6rem;
+  height: 4rem;
+  border-radius: 45%;
+  animation-delay: 300ms;
+}
+
+.anatomy-node-base {
+  bottom: 4%;
+  left: calc(50% - 2.3rem);
+  width: 4.6rem;
+  height: 3.2rem;
+  border-radius: 45%;
+  animation-delay: 600ms;
+}
+
+.bento-map {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.35rem;
+  align-self: end;
+  height: 8rem;
+  transform: rotate(3deg);
+  transition: transform 320ms var(--ease);
+}
+
+.range-project-bento:hover .bento-map,
+.range-project-bento:focus-visible .bento-map {
+  transform: rotate(0deg) scale(1.04);
+}
+
+.bento-map span {
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.bento-map span:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: var(--coral);
+}
+
+.bento-map span:nth-child(3) {
+  grid-row: span 2;
+  background: var(--blue);
+}
+
+.commerce-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 3.5rem;
+  gap: 0.5rem;
+  align-items: center;
+  align-self: end;
+}
+
+.commerce-product,
+.commerce-bag {
+  display: grid;
+  width: 3.5rem;
+  height: 4.5rem;
+  border: 1px solid var(--ink);
+  background: var(--coral);
+  place-items: center;
+}
+
+.commerce-product::after {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  content: "";
+}
+
+.commerce-bag {
+  height: 3.5rem;
+  background: var(--ink);
+  color: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+}
+
+.commerce-route {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--ink);
+}
+
+.commerce-route i {
+  position: absolute;
+  top: -0.3rem;
+  left: 0;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: commerce-route 2.4s var(--ease) infinite;
+}
+
+@keyframes anatomy-pulse {
+  50% { box-shadow: 0 0 0 0.6rem oklch(0.78 0.13 166 / 0); }
+}
+
+@keyframes commerce-route {
+  50%, 100% { transform: translateX(3rem); }
 }
 
 .capabilities {
@@ -1898,6 +2186,42 @@ h3 {
 
   .case-study {
     min-height: auto;
+  }
+
+  .range-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .range-grid {
+    grid-template-areas:
+      "anatomy"
+      "bento"
+      "commerce";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .range-project {
+    min-height: 20rem;
+  }
+
+  .range-project-anatomy {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .range-project-bento,
+  .range-project-commerce {
+    grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.55fr);
+  }
+
+  .anatomy-map {
+    height: 15rem;
+  }
+
+  .range-arrow {
+    top: 1rem;
+    right: 1rem;
   }
 
   .case-meta,
