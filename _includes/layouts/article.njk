@@ -13,8 +13,11 @@
     <meta property="article:published_time" content="{{ date | isoDate }}" />
     <meta property="article:author" content="Elijah Mathai" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ title }} | Elijah Mathai" />
+    <meta name="twitter:description" content="{{ description }}" />
     <meta name="twitter:image" content="{{ site.url }}{{ image }}" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    <link rel="alternate" type="application/atom+xml" title="Elijah Mathai — Engineering Notes" href="{{ site.url }}/feed.xml" />
     <link rel="icon" type="image/png" href="/assets/elijah-mathai-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,13 +27,58 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": {{ title | json | safe }},
-        "description": {{ description | json | safe }},
-        "image": "{{ site.url }}{{ image }}",
-        "datePublished": "{{ date | isoDate }}",
-        "author": { "@type": "Person", "name": "Elijah Mathai" },
-        "mainEntityOfPage": "{{ site.url }}{{ page.url }}"
+        "@graph": [
+          {
+            "@type": "BlogPosting",
+            "@id": "{{ site.url }}{{ page.url }}#article",
+            "url": "{{ site.url }}{{ page.url }}",
+            "headline": {{ title | json | safe }},
+            "description": {{ description | json | safe }},
+            "image": "{{ site.url }}{{ image }}",
+            "datePublished": "{{ date | isoDate }}",
+            "author": { "@id": "{{ site.url }}/#person" },
+            "publisher": { "@id": "{{ site.url }}/#person" },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "{{ site.url }}{{ page.url }}"
+            },
+            "isPartOf": { "@id": "{{ site.url }}/articles/#collection" }
+          },
+          {
+            "@type": "Person",
+            "@id": "{{ site.url }}/#person",
+            "name": "Elijah Mathai",
+            "url": "{{ site.url }}/",
+            "image": "{{ site.url }}/assets/elijah-mathai-portrait.jpg",
+            "sameAs": [
+              "https://github.com/Elijah-cod",
+              "https://www.linkedin.com/in/elijah-mathai-52b69725b/"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "{{ site.url }}/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Engineering Notes",
+                "item": "{{ site.url }}/articles/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": {{ title | json | safe }},
+                "item": "{{ site.url }}{{ page.url }}"
+              }
+            ]
+          }
+        ]
       }
     </script>
   </head>
@@ -64,6 +112,24 @@
         <article class="article-body">{{ content | safe }}
           {% if projectUrl %}
             <div class="article-end"><p><strong>Related build:</strong> <a class="text-link" href="{{ projectUrl }}" target="_blank" rel="noreferrer">{{ projectLabel or "Open the live project" }} ↗</a></p></div>
+          {% endif %}
+
+          {% set neighbors = collections.articles | articleNeighbors(page.url) %}
+          {% if neighbors.newer or neighbors.older %}
+            <nav class="article-pagination" aria-label="Continue reading">
+              {% if neighbors.older %}
+                <a href="{{ neighbors.older.url }}">
+                  <span>Older note</span>
+                  <strong>{{ neighbors.older.data.title }}</strong>
+                </a>
+              {% endif %}
+              {% if neighbors.newer %}
+                <a href="{{ neighbors.newer.url }}">
+                  <span>Newer note</span>
+                  <strong>{{ neighbors.newer.data.title }}</strong>
+                </a>
+              {% endif %}
+            </nav>
           {% endif %}
         </article>
         <aside class="article-aside" aria-label="Article details">

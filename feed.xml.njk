@@ -1,0 +1,28 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Elijah Mathai — Engineering Notes</title>
+  <subtitle>Practical notes on AI systems, full-stack architecture, performance, accessibility, and design engineering.</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="{{ site.url }}/articles/" rel="alternate" type="text/html" />
+  <id>{{ site.url }}/articles/</id>
+  <updated>{{ collections.articles[0].date | isoDate }}T00:00:00Z</updated>
+  <author>
+    <name>Elijah Mathai</name>
+    <uri>{{ site.url }}/</uri>
+  </author>
+  {% for article in collections.articles %}
+  <entry>
+    <title>{{ article.data.title | escape }}</title>
+    <link href="{{ site.url }}{{ article.url }}" rel="alternate" type="text/html" />
+    <id>{{ site.url }}{{ article.url }}</id>
+    <published>{{ article.date | isoDate }}T00:00:00Z</published>
+    <updated>{{ article.date | isoDate }}T00:00:00Z</updated>
+    <summary>{{ article.data.description | escape }}</summary>
+    <category term="{{ article.data.category | escape }}" />
+  </entry>
+  {% endfor %}
+</feed>

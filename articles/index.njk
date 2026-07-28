@@ -15,12 +15,38 @@ permalink: /articles/index.html
     <meta property="og:image" content="{{ site.url }}/assets/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="{{ site.url }}/articles/" />
+    <link rel="alternate" type="application/atom+xml" title="Elijah Mathai — Engineering Notes" href="{{ site.url }}/feed.xml" />
     <link rel="icon" type="image/png" href="/assets/elijah-mathai-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
     <title>Engineering Notes | Elijah Mathai</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "{{ site.url }}/articles/#collection",
+        "url": "{{ site.url }}/articles/",
+        "name": "Engineering Notes by Elijah Mathai",
+        "description": "Practical writing from real AI, frontend, and full-stack product builds.",
+        "author": { "@id": "{{ site.url }}/#person" },
+        "mainEntity": {
+          "@type": "ItemList",
+          "numberOfItems": {{ collections.articles | length }},
+          "itemListElement": [
+            {% for article in collections.articles %}
+              {
+                "@type": "ListItem",
+                "position": {{ loop.index }},
+                "url": "{{ site.url }}{{ article.url }}",
+                "name": {{ article.data.title | json | safe }}
+              }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+      }
+    </script>
   </head>
   <body class="article-page">
     <a class="skip-link" href="#main-content">Skip to content</a>

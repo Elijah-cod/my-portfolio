@@ -1699,6 +1699,48 @@ h3 {
   margin-top: 2rem;
 }
 
+.article-more {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.32fr) 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ink);
+}
+
+.article-more-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-more-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.article-more-list a {
+  font-weight: 600;
+}
+
+.article-more-list a:hover {
+  color: var(--blue-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.article-more-list span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .contact-grid {
   align-items: start;
 }
@@ -2025,6 +2067,42 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.article-pagination {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 3rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+}
+
+.article-pagination a {
+  display: grid;
+  gap: 0.6rem;
+  min-height: 8.5rem;
+  padding: 1.4rem;
+  background: var(--surface);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.article-pagination a:hover {
+  background: var(--blue);
+  color: var(--surface);
+}
+
+.article-pagination span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.article-pagination strong {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
 @media (max-width: 980px) {
   .story-grid,
   .contact-grid,
@@ -2065,6 +2143,10 @@ h3 {
 
   .article-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .article-more {
+    grid-template-columns: 1fr;
   }
 
   .article-featured {
@@ -2318,6 +2400,11 @@ h3 {
 
   .article-card {
     min-height: 22rem;
+  }
+
+  .article-more-list li,
+  .article-pagination {
+    grid-template-columns: 1fr;
   }
 
   .contact-form label:nth-child(3),

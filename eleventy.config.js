@@ -34,6 +34,19 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("json", (value) => JSON.stringify(value));
 
+  eleventyConfig.addFilter("articleNeighbors", (articles, currentUrl) => {
+    const currentIndex = articles.findIndex((article) => article.url === currentUrl);
+
+    if (currentIndex === -1) {
+      return {};
+    }
+
+    return {
+      newer: articles[currentIndex - 1],
+      older: articles[currentIndex + 1]
+    };
+  });
+
   return {
     dir: {
       input: ".",

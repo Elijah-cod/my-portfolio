@@ -24,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="{{ site.url }}/assets/og.png" />
     <link rel="canonical" href="{{ site.url }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Elijah Mathai — Engineering Notes" href="{{ site.url }}/feed.xml" />
     <link rel="icon" type="image/png" href="assets/elijah-mathai-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,22 +37,41 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Elijah Mathai",
-        "url": "{{ site.url }}/",
-        "image": "{{ site.url }}/assets/elijah-mathai-portrait.jpg",
-        "jobTitle": "Full-Stack Product Engineer",
-        "description": "Full-stack product engineer combining UI/UX expertise, backend architecture, and AI systems.",
-        "sameAs": [
-          "https://github.com/Elijah-cod",
-          "https://www.linkedin.com/in/elijah-mathai-52b69725b/"
-        ],
-        "knowsAbout": [
-          "Full-stack development",
-          "UI/UX design",
-          "Retrieval-augmented generation",
-          "Backend architecture",
-          "Product engineering"
+        "@graph": [
+          {
+            "@type": "ProfilePage",
+            "@id": "{{ site.url }}/#profile",
+            "url": "{{ site.url }}/",
+            "name": "Elijah Mathai — Full-Stack Product Engineer",
+            "mainEntity": { "@id": "{{ site.url }}/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "{{ site.url }}/#person",
+            "name": "Elijah Mathai",
+            "url": "{{ site.url }}/",
+            "image": "{{ site.url }}/assets/elijah-mathai-portrait.jpg",
+            "jobTitle": "Full-Stack Product Engineer",
+            "description": "Full-stack product engineer combining UI/UX expertise, backend architecture, and AI systems.",
+            "sameAs": [
+              "https://github.com/Elijah-cod",
+              "https://www.linkedin.com/in/elijah-mathai-52b69725b/"
+            ],
+            "knowsAbout": [
+              "Full-stack development",
+              "UI/UX design",
+              "Retrieval-augmented generation",
+              "Backend architecture",
+              "Product engineering"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "{{ site.url }}/#website",
+            "url": "{{ site.url }}/",
+            "name": "Elijah Mathai",
+            "publisher": { "@id": "{{ site.url }}/#person" }
+          }
         ]
       }
     </script>
@@ -445,7 +465,21 @@
             {% endfor %}
           </div>
 
-          <a class="button button-outline article-archive-link" href="articles/">View all articles</a>
+          <div class="article-more">
+            <p class="eyebrow">More engineering notes</p>
+            <ul class="article-more-list">
+              {% for article in collections.articles %}
+                {% if loop.index > 3 %}
+                  <li>
+                    <a href="{{ article.url }}">{{ article.data.title }}</a>
+                    <span>{{ article.data.category }}</span>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+
+          <a class="button button-outline article-archive-link" href="articles/">Browse the technical ledger</a>
         </div>
       </section>
 
